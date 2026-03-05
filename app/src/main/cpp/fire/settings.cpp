@@ -31,12 +31,12 @@ Settings::Settings() {
     sizeRatio = ivec3(1, 1, 1);
 
     touchMode = false;
-    orientationMode = true;
+    orientationMode = false;
     backgroundColor = vec3(0.0f, 0.0f, 0.0f);
     filterColor = vec3(1.0f, 1.0f, 1.0f);
     colorSpace = vec3(1.0f, 1.0f, 1.0f);
 
-    boundaryType = BoundaryType::none;
+    boundaryType = BoundaryType::some;
     sourceMode = SourceMode::add;
     sourceType = SourceType::singleSphere;
     sourceRadius = 0.0f;
