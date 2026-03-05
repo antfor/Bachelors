@@ -30,7 +30,7 @@ Settings::Settings() {
 
     sizeRatio = ivec3(1, 1, 1);
 
-    touchMode = true;
+    touchMode = false;
     orientationMode = true;
     backgroundColor = vec3(0.0f, 0.0f, 0.0f);
     filterColor = vec3(1.0f, 1.0f, 1.0f);
