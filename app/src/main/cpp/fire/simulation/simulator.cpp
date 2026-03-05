@@ -153,7 +153,7 @@ void Simulator::updateDeviceRotationMatrix(float *rotationMatrix){
 
     buoyancy_direction = vec3(rotate(mat4(1.0f), rotation, vec3(0.0f, 1.0f, 0.0f)) * vec4(buoyancy_direction, 0.0f));
 
-    LOG_INFO("Device rotation matrix: %s", glm::to_string(deviceRotationMatrix).c_str());
+    //LOG_INFO("Device rotation matrix: %s", glm::to_string(deviceRotationMatrix).c_str());
 }
 
 
@@ -293,7 +293,7 @@ void Simulator::smokeDensityStep(float delta_time) {
 void Simulator::addExternalForce(vec3 position, vec3 vector, Settings* settings) {
     float radius = 4.0f;
 
-    LOG_INFO("POSITION: %f, %f, %f", position.x, position.y, position.z);
+    //LOG_INFO("POSITION: %f, %f, %f", position.x, position.y, position.z);
 
     fillSphere(force_field, vector * 100.0f, settings->getSimulationSize() * position, radius, Resolution::velocity, settings);
 

@@ -27,8 +27,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled = false
+        }
         release {
-            minifyEnabled false
+            minifyEnabled = true
+            shrinkResources = true
+            // Use debug signing for local testing of the release build
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -39,7 +45,13 @@ android {
         }
     }
 
-    ndkVersion = "21.2.6472646"
+    ndkVersion "29.0.14206865"
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
 }
 
 dependencies {
