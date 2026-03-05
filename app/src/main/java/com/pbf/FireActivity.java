@@ -20,7 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.datx02_20_21.R;
+import com.anton.datx02_20_21.R;
 
 public class FireActivity extends FragmentActivity {
 

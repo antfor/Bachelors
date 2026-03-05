@@ -1,7 +1,6 @@
 package com.pbf;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
-import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.datx02_20_21.R;
+import com.anton.datx02_20_21.R;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorChangedListener;
 import com.flask.colorpicker.OnColorSelectedListener;
@@ -714,68 +712,47 @@ public class SettingsFragment extends Fragment {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            switch (seekBar.getId()){
-                case R.id.resolutionScaleBar:
-                    updateResolutionScale(value*step);
-                    break;
-                case R.id.simulationScaleBar:
-                    updateSimulationScale(value*step);
-                    break;
-                case R.id.timeStepBar:
-                    updateTimeStep(value*step);
-                    break;
-                case R.id.objectRadiusBar:
-                    updateObjectRadius(value*step);
-                    break;
-                case R.id.objectTemperatureBar:
-                    updateObjectTemperature(value*step);
-                    break;
-                case R.id.objectDensityBar:
-                    updateObjectDensity(value*step);
-                    break;
-                case R.id.objectVelocityBar:
-                    updateObjectVelocity(value*step);
-                    break;
-                case R.id.windStrengthBar:
-                    updateWindStrength(value*step);
-                    break;
-                case R.id.windAngleBar:
-                    updateWindAngle(value*step);
-                    break;
-                case R.id.vorticityBar:
-                    updateVorticity(value*step);
-                    break;
-                case R.id.buoyancyBar:
-                    updateBuoyancy(value*step);
-                    break;
-                case R.id.smokeDissipationBar:
-                    updateSmokeDissipation(value*step);
-                    break;
-                case R.id.temperatureKinematicViscosityBar:
-                    updateTemperatureViscosity(value*step);
-                    break;
-                case R.id.smokeKinematicViscosityBar:
-                    updateSmokeViscosity(value*step);
-                    break;
-                case R.id.velocityKinematicViscosityBar:
-                    updateVelocityViscosity(value*step);
-                    break;
-                case R.id.bandMinBar:
-                    updateMinNoiseBand(value*step);
-                    break;
-                case R.id.bandMaxBar:
-                    updateMaxNoiseBand(value*step);
-                    break;
-                case R.id.densityDiffusionIterationsBar:
-                    updateDensityDiffusionIterations((int)(value*step));
-                    break;
-                case R.id.velocityDiffusionIterationsBar:
-                    updateVelocityDiffusionIterations((int)(value*step));
-                    break;
-                case R.id.projectionIterationsBar:
-                    updateProjectionIterations((int)(value*step));
-                    break;
-
+            int id = seekBar.getId();
+            if (id == R.id.resolutionScaleBar) {
+                updateResolutionScale(value * step);
+            } else if (id == R.id.simulationScaleBar) {
+                updateSimulationScale(value * step);
+            } else if (id == R.id.timeStepBar) {
+                updateTimeStep(value * step);
+            } else if (id == R.id.objectRadiusBar) {
+                updateObjectRadius(value * step);
+            } else if (id == R.id.objectTemperatureBar) {
+                updateObjectTemperature(value * step);
+            } else if (id == R.id.objectDensityBar) {
+                updateObjectDensity(value * step);
+            } else if (id == R.id.objectVelocityBar) {
+                updateObjectVelocity(value * step);
+            } else if (id == R.id.windStrengthBar) {
+                updateWindStrength(value * step);
+            } else if (id == R.id.windAngleBar) {
+                updateWindAngle(value * step);
+            } else if (id == R.id.vorticityBar) {
+                updateVorticity(value * step);
+            } else if (id == R.id.buoyancyBar) {
+                updateBuoyancy(value * step);
+            } else if (id == R.id.smokeDissipationBar) {
+                updateSmokeDissipation(value * step);
+            } else if (id == R.id.temperatureKinematicViscosityBar) {
+                updateTemperatureViscosity(value * step);
+            } else if (id == R.id.smokeKinematicViscosityBar) {
+                updateSmokeViscosity(value * step);
+            } else if (id == R.id.velocityKinematicViscosityBar) {
+                updateVelocityViscosity(value * step);
+            } else if (id == R.id.bandMinBar) {
+                updateMinNoiseBand(value * step);
+            } else if (id == R.id.bandMaxBar) {
+                updateMaxNoiseBand(value * step);
+            } else if (id == R.id.densityDiffusionIterationsBar) {
+                updateDensityDiffusionIterations((int) (value * step));
+            } else if (id == R.id.velocityDiffusionIterationsBar) {
+                updateVelocityDiffusionIterations((int) (value * step));
+            } else if (id == R.id.projectionIterationsBar) {
+                updateProjectionIterations((int) (value * step));
             }
         }
         public native void updateResolutionScale(float scale);

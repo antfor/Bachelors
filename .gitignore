@@ -1,14 +1,41 @@
+# === Android Studio / IntelliJ ===
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-/gradle/
+
+# === Gradle ===
+.gradle/
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
+
+# === Local config ===
+local.properties
+
+# === Build outputs ===
+/build/
+/app/build/
+/appstore/build/
+captures/
+
+# === Native / CMake ===
+.externalNativeBuild/
+.cxx/
+cmake-build-debug/
+cmake-build-release/
+
+# === OS junk ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+
+# === Release artifacts ===
+app/release/*.apk
+app/release/*.aab
+
+# === Misc ===
 /_windows/
-app/release/app-release.aab
+
