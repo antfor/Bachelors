@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.Fade;
@@ -12,6 +13,7 @@ import android.transition.TransitionManager;
 import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowMetrics;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
@@ -36,6 +38,7 @@ public class FireActivity extends FragmentActivity {
     private ConstraintLayout scrollView;
     private ToggleButton settingsButton;
     private FireView view;
+    private SettingsButtonToggleListener settingsButtonToggleListener;
 
     private AnimationDrawable animation;
 
@@ -57,7 +60,8 @@ public class FireActivity extends FragmentActivity {
 
         settingsFragment = new SettingsFragment();
         settingsButton = findViewById(R.id.toggleSettingsButton);
-        settingsButton.setOnCheckedChangeListener(new SettingsButtonToggleListener());
+        settingsButtonToggleListener = new SettingsButtonToggleListener();
+        settingsButton.setOnCheckedChangeListener(settingsButtonToggleListener);
 
         ImageView loading = (ImageView)findViewById(R.id.loadingImage);
         animation = (AnimationDrawable)loading.getDrawable();
@@ -71,16 +75,31 @@ public class FireActivity extends FragmentActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Runnable hideScrollViewRunnable = settingsButtonToggleListener.getHideScrollViewRunnable();
+        if (hideScrollViewRunnable != null) {
+            mainLayout.removeCallbacks(hideScrollViewRunnable);
+        }
+    }
+
 
 
     private class SettingsButtonToggleListener implements CompoundButton.OnCheckedChangeListener {
 
         private final int DURATION_IN_MILLISECONDS = 250;
         private final int MARGIN = 8;
+        private Runnable hideScrollViewRunnable;
+
 
         SettingsButtonToggleListener(){
             super();
             initFragment();
+        }
+
+        public Runnable getHideScrollViewRunnable(){
+            return hideScrollViewRunnable;
         }
 
         @Override
@@ -126,31 +145,12 @@ public class FireActivity extends FragmentActivity {
         }
 
         private void hideFragment() {
-            //for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-              //  getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-            //}
 
             getSupportFragmentManager().beginTransaction().hide(settingsFragment).commitNow();
 
-            Thread t = new Thread(){
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(DURATION_IN_MILLISECONDS);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                findViewById(R.id.scrollViewContainer).setVisibility(View.INVISIBLE);
-                            }
-                        });
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            t.start();
-
+            hideScrollViewRunnable = () ->
+                    findViewById(R.id.scrollViewContainer).setVisibility(View.INVISIBLE);
+            mainLayout.postDelayed(hideScrollViewRunnable, DURATION_IN_MILLISECONDS);
         }
 
         // Rotate Button 180 degress counter-clockwise

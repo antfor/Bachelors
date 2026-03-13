@@ -53,8 +53,6 @@ void Fire::update(){
 
     if(shouldUpdateSettings){
 
-        LOG_INFO("WOW!!!!!");
-
         renderer->changeSettings(settings);
         simulator->changeSettings(settings, shouldRegenFields);
 
@@ -74,7 +72,7 @@ void Fire::touch(double x, double y, double dx, double dy){
         mat4 inverseMVP = renderer->getInverseMVP();
 
         vec3 normalPos = 2.0f * vec3(x/screen_width, 1.0f - y/screen_height, 0.5f) - vec3(1.0f);
-        LOG_INFO("ROSITION: %f, %f, %f", normalPos.x, normalPos.y, normalPos.z);
+
         vec3 gridPos = vec3(inverseMVP * vec4(normalPos, 0.0f)) + vec3(0.5f) - renderer->getOffset();
 
         vec3 normalVec = vec3(dx, -dy, 0.0f);
